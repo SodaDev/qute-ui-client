@@ -21,7 +21,12 @@ class QueueItem extends Component {
             toggled: false
         };
 
-        this.onMouseDown = () => this.setState({ toggled : !this.state.toggled });
+        this.onMouseDown = this.watch.bind(this);
+    }
+
+    watch() {
+        this.setState({ toggled : !this.state.toggled });
+        setTimeout(() => navigator.vibrate([300, 100, 300, 100, 300]), 3000);
     }
 
     render() {
