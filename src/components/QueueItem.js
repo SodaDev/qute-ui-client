@@ -10,7 +10,7 @@ class QueueItem extends Component {
     props: Props;
 
     state: {
-        toggled: boolean;
+        toggled: boolean
     };
 
     onMouseDown: () => void;
@@ -18,26 +18,26 @@ class QueueItem extends Component {
     constructor(props: Props) {
         super(props);
         this.state = {
-            toggled: false,
-            theme: 'purple'
+            toggled: false
         };
 
-        this.onMouseDown = () => {};
+        this.onMouseDown = () => this.setState({ toggled : !this.state.toggled });
     }
 
     render() {
-        let className = 'card theme-' + this.state.theme;
+        let cardClassName = 'card theme-' + this.props.theme;
+        let cardFaceClassName = 'card__part__inner card__face ' + (this.state.toggled ? 'active' : '');
 
         return (
-            <section className={className} onClick={this.onMouseDown}>
+            <section className={cardClassName} onClick={this.onMouseDown}>
                 <section className="card__part card__part-2">
                     <div className="card__part__side m--back">
-                        <div className="card__part__inner card__face">
+                        <div className={cardFaceClassName}>
                             <div className="card__face__colored-side"></div>
-                            <h3 className="card__face__price">ID</h3>
+                            <h3 className="card__face__price">ID: {this.props.id}</h3>
                             <div className="card__face__from-to">
-                                <p>Some details of the waiting dude</p>
-                                <p>Maybe details or something more</p>
+                                <p>Some details of queue</p>
+                                <p>Maybe details of position</p>
                             </div>
                             <div className="card__face__stats card__face__stats--req">
                                 marker
@@ -63,6 +63,6 @@ class QueueItem extends Component {
         );
     }
 }
-// QueueItem.defaultProps = { visited: false };
+QueueItem.defaultProps = { theme: 'purple' };
 
 export default QueueItem;
